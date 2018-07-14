@@ -1,0 +1,2 @@
+E:\GoogleDrive\Development\RansomNote\RansomNote\RansomNote.DebugConsole\obj\x64\Debug\RansomNote.DebugConsole.csprojAssemblyReference.cache
+E:\GoogleDrive\Development\RansomNote\RansomNote\RansomNote.DebugConsole\obj\x64\Debug\RansomNote.DebugConsole.csproj.CoreCompileInputs.cache
