@@ -213,3 +213,5 @@ E:\Development\RansomNote\RansomNote.GUI\bin\Debug\Accord.xml
 E:\Development\RansomNote\RansomNote.GUI\bin\Debug\Accord.Statistics.xml
 E:\Development\RansomNote\RansomNote.GUI\bin\Debug\Accord.Math.xml
 E:\Development\RansomNote\RansomNote.GUI\bin\Debug\Accord.Math.Core.xml
+E:\Development\RansomNote\RansomNote.GUI\bin\Debug\Newtonsoft.Json.dll
+E:\Development\RansomNote\RansomNote.GUI\bin\Debug\Newtonsoft.Json.xml

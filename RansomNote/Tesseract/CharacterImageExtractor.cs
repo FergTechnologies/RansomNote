@@ -1,4 +1,5 @@
 ﻿using Leptonica;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -42,7 +43,7 @@ namespace RansomNote.Tesseract
             Out(new ExtractionEventArgs("Loading complete."));
         }
 
-        public void GetCharacterImages()
+        public void GetCharacterImages(string prefix)
         {
             Out(new ExtractionEventArgs("Preparing to initialize tesseract."));
             var localDict = new Dictionary<char, Image>();
@@ -50,7 +51,7 @@ namespace RansomNote.Tesseract
             var lang = "eng";
             var api = new TessBaseAPI();
             OcrEngineMode oem = OcrEngineMode.TESSERACT_LSTM_COMBINED;
-            PageSegmentationMode psm = PageSegmentationMode.SINGLE_CHAR;
+            PageSegmentationMode psm = PageSegmentationMode.RAW_LINE;
             if (!api.Init(dPath, lang, oem))
             {
                 Err(new UnhandledExceptionEventArgs(new Exception("Could not initialize tesseract."), true));
@@ -62,9 +63,9 @@ namespace RansomNote.Tesseract
             api.Recognize();
             
             var pageItLevel = PageIteratorLevel.RIL_SYMBOL;
-            var symbCount = 0;
-            var iterator = api.GetIterator().GetPageIterator();
+            var iterator = api.GetIterator();
             iterator.Begin();
+            var l = new List<CharacterMap>();
             using (var iter = iterator)
             {
                 do
@@ -73,52 +74,65 @@ namespace RansomNote.Tesseract
                     {
                         do
                         {
-                            if (iter.IsAtBeginningOf(PageIteratorLevel.RIL_BLOCK))
-                            {
-                                // do whatever you need to do when a block (top most level result) is encountered.
-                            }
-                            if (iter.IsAtBeginningOf(PageIteratorLevel.RIL_PARA))
-                            {
-                                // do whatever you need to do when a paragraph is encountered.
-                            }
-                            if (iter.IsAtBeginningOf(PageIteratorLevel.RIL_TEXTLINE))
-                            {
-                                // do whatever you need to do when a line of text is encountered is encountered.
-                            }
-                            if (iter.IsAtBeginningOf(PageIteratorLevel.RIL_WORD))
-                            {
-                                // do whatever you need to do when a word is encountered is encountered.
-                            }
-
                             // get bounding box for symbol
-
-                            if (iter.BoundingBox(pageItLevel, out int left, out int top, out int right, out int bottom))
+                            var resultIterator = iterator.GetPageIterator();
+                            var symbCount = 0;
+                            do
                             {
+                                resultIterator.BoundingBox(pageItLevel, out int left, out int top, out int right, out int bottom);
+                                var ch = iter.GetUTF8Text(pageItLevel);
                                 var rect = new Rectangle(left, top, right - left, bottom - top);
+                               
                                 var img = Crop(ima, rect);
+                                if (img == null)
+                                {
+                                    Out(new ExtractionEventArgs($"Unabler to crop image with width: {rect.Width} height: {rect.Height}"));
+                                    continue;
+                                }
                                 Out(new ExtractionEventArgs($"Cropped Character For Box {symbCount}."));
-                                var path = $@"{_savePath}\eng.mycoiocr.{symbCount}.png";
+                                var path = $@"{_savePath}\{prefix}.{symbCount}.png";
                                 img.Save(path, ImageFormat.Png);
+                                l.Add(new CharacterMap
+                                {
+                                    FilePath = path,
+                                    Text = ch
+                                });
                                 Out(new ExtractionEventArgs($"Saving Cropped Image as {path}"));
                                 symbCount++;
-                            }
+                            } while (resultIterator.Next(pageItLevel));
                         } while (iter.Next(PageIteratorLevel.RIL_WORD));
                     } while (iter.Next(PageIteratorLevel.RIL_TEXTLINE));
                 } while (iter.Next(PageIteratorLevel.RIL_PARA));
             }
-           
+
+            Out(new ExtractionEventArgs("Serializing Character Data to JSON..."));
+            var json = JsonConvert.SerializeObject(l);
+            var rPath = $@"{_savePath}\{prefix}.results.json";
+            Out(new ExtractionEventArgs($"Writing JSON to {rPath}..."));
+            File.WriteAllText(rPath, json);
+            Out(new ExtractionEventArgs($"Results saved to {rPath}."));
             Out(new ExtractionEventArgs($"Character Images Retrieved. Please see the folder at path {_savePath}."));
 
         }
 
         private Image Crop(Image img, Rectangle rect)
         {
+            if (rect.Width == 0 || rect.Height == 0)
+            {
+                return null;
+            }
             var bMap  = new Bitmap(rect.Width, rect.Height);
             using (var g = System.Drawing.Graphics.FromImage(bMap))
             {
                 g.DrawImage(img, new Rectangle(0, 0, bMap.Width, bMap.Height), rect, GraphicsUnit.Pixel);
             }
             return bMap;
+        }
+
+        private struct CharacterMap
+        {
+            public string FilePath;
+            public string Text;
         }
 
         

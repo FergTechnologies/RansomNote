@@ -203,6 +203,8 @@ E:\Development\RansomNote\RansomNote\bin\Debug\x86\pvt.cppan.demo.webp-0.6.0.dll
 E:\Development\RansomNote\RansomNote\bin\Debug\x86\pvt.cppan.demo.xz_utils.lzma-5.2.3.dll
 E:\Development\RansomNote\RansomNote\bin\Debug\x64\pvt.cppan.demo.google.tesseract.libtesseract400.dll
 E:\Development\RansomNote\RansomNote\bin\Debug\x86\pvt.cppan.demo.google.tesseract.libtesseract400.dll
+E:\Development\RansomNote\RansomNote\bin\Debug\RansomNote.Core.dll
+E:\Development\RansomNote\RansomNote\bin\Debug\RansomNote.Core.pdb
 E:\Development\RansomNote\RansomNote\bin\Debug\Accord.dll
 E:\Development\RansomNote\RansomNote\bin\Debug\Accord.Imaging.dll
 E:\Development\RansomNote\RansomNote\bin\Debug\Accord.Math.Core.dll
@@ -218,7 +220,7 @@ E:\Development\RansomNote\RansomNote\bin\Debug\Accord.Statistics.xml
 E:\Development\RansomNote\RansomNote\obj\Debug\RansomNote.csprojAssemblyReference.cache
 E:\Development\RansomNote\RansomNote\obj\Debug\RansomNote.csproj.CoreCompileInputs.cache
 E:\Development\RansomNote\RansomNote\obj\Debug\RansomNote.csproj.CopyComplete
-E:\Development\RansomNote\RansomNote\bin\Debug\RansomNote.Core.dll
-E:\Development\RansomNote\RansomNote\bin\Debug\RansomNote.Core.pdb
 E:\Development\RansomNote\RansomNote\obj\Debug\RansomNote.Core.dll
 E:\Development\RansomNote\RansomNote\obj\Debug\RansomNote.Core.pdb
+E:\Development\RansomNote\RansomNote\bin\Debug\Newtonsoft.Json.dll
+E:\Development\RansomNote\RansomNote\bin\Debug\Newtonsoft.Json.xml

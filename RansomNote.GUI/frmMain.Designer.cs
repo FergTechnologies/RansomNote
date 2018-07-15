@@ -33,13 +33,13 @@
             this.shellSaveFolder = new GongSolutions.Shell.ShellView();
             this.placesToolbar1 = new GongSolutions.Shell.PlacesToolbar();
             this.label1 = new System.Windows.Forms.Label();
-            this.lstConsole = new System.Windows.Forms.ListBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.lblConsoleOut = new System.Windows.Forms.Label();
-            this.picPreview = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.shellView1 = new GongSolutions.Shell.ShellView();
             this.btnLoad = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.picPreview = new System.Windows.Forms.PictureBox();
+            this.shellView1 = new GongSolutions.Shell.ShellView();
+            this.lblConsoleOut = new System.Windows.Forms.Label();
+            this.txtOutput = new System.Windows.Forms.TextBox();
             this.pnlExplorer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -109,17 +109,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Navigate to the Folder You Wish to Save the Character Images.";
             // 
-            // lstConsole
-            // 
-            this.lstConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstConsole.FormattingEnabled = true;
-            this.lstConsole.Location = new System.Drawing.Point(12, 28);
-            this.lstConsole.Name = "lstConsole";
-            this.lstConsole.Size = new System.Drawing.Size(895, 186);
-            this.lstConsole.TabIndex = 2;
-            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -138,21 +127,31 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.txtOutput);
             this.splitContainer1.Panel2.Controls.Add(this.shellView1);
             this.splitContainer1.Panel2.Controls.Add(this.lblConsoleOut);
-            this.splitContainer1.Panel2.Controls.Add(this.lstConsole);
             this.splitContainer1.Size = new System.Drawing.Size(920, 794);
             this.splitContainer1.SplitterDistance = 550;
             this.splitContainer1.TabIndex = 3;
             // 
-            // lblConsoleOut
+            // btnLoad
             // 
-            this.lblConsoleOut.AutoSize = true;
-            this.lblConsoleOut.Location = new System.Drawing.Point(12, 12);
-            this.lblConsoleOut.Name = "lblConsoleOut";
-            this.lblConsoleOut.Size = new System.Drawing.Size(45, 13);
-            this.lblConsoleOut.TabIndex = 3;
-            this.lblConsoleOut.Text = "Console";
+            this.btnLoad.Location = new System.Drawing.Point(15, 103);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(169, 23);
+            this.btnLoad.TabIndex = 4;
+            this.btnLoad.Text = "Load Image";
+            this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 255);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(77, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Image Preview";
             // 
             // picPreview
             // 
@@ -164,15 +163,6 @@
             this.picPreview.TabIndex = 2;
             this.picPreview.TabStop = false;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 255);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Image Preview";
-            // 
             // shellView1
             // 
             this.shellView1.Location = new System.Drawing.Point(795, 28);
@@ -182,15 +172,22 @@
             this.shellView1.TabIndex = 4;
             this.shellView1.Text = "shellView1";
             // 
-            // btnLoad
+            // lblConsoleOut
             // 
-            this.btnLoad.Location = new System.Drawing.Point(15, 103);
-            this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(169, 23);
-            this.btnLoad.TabIndex = 4;
-            this.btnLoad.Text = "Load Image";
-            this.btnLoad.UseVisualStyleBackColor = true;
-            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            this.lblConsoleOut.AutoSize = true;
+            this.lblConsoleOut.Location = new System.Drawing.Point(12, 12);
+            this.lblConsoleOut.Name = "lblConsoleOut";
+            this.lblConsoleOut.Size = new System.Drawing.Size(45, 13);
+            this.lblConsoleOut.TabIndex = 3;
+            this.lblConsoleOut.Text = "Console";
+            // 
+            // txtOutput
+            // 
+            this.txtOutput.Location = new System.Drawing.Point(12, 28);
+            this.txtOutput.Multiline = true;
+            this.txtOutput.Name = "txtOutput";
+            this.txtOutput.Size = new System.Drawing.Size(896, 200);
+            this.txtOutput.TabIndex = 5;
             // 
             // frmMain
             // 
@@ -222,13 +219,13 @@
         private GongSolutions.Shell.PlacesToolbar placesToolbar1;
         private GongSolutions.Shell.FileDialogToolbar fToolbar;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox lstConsole;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label lblConsoleOut;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox picPreview;
         private GongSolutions.Shell.ShellView shellView1;
         private System.Windows.Forms.Button btnLoad;
+        private System.Windows.Forms.TextBox txtOutput;
     }
 }
 

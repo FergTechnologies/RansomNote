@@ -16,10 +16,13 @@ namespace RansomNote.GUI
 {
     public partial class frmMain : Form
     {
+        TextBoxStreamWriter writer;
+
        
         public frmMain()
         {
             InitializeComponent();
+            writer = new TextBoxStreamWriter(txtOutput);
             
         }
 
@@ -51,7 +54,7 @@ namespace RansomNote.GUI
                 var path = ofb.FileName;
                 Task.Factory.StartNew(() =>
                 {
-                    cie.GetCharacterImages();
+                    cie.GetCharacterImages("eng.mycoiocr");
                 });
             }
                 
@@ -71,17 +74,17 @@ namespace RansomNote.GUI
 
         private void Cie_Error(object sender, UnhandledExceptionEventArgs e)
         {
-            lstConsole.InvokeIfRequired(() =>
+            txtOutput.InvokeIfRequired(() =>
             {
-                lstConsole.Items.Add(((Exception)e.ExceptionObject).Message);
+                writer.Write($"\nERROR: {((Exception)e.ExceptionObject).Message}");
             });
         }
 
         private void Cie_ConsoleOut(object sender, ExtractionEventArgs e)
         {
-            lstConsole.InvokeIfRequired(() =>
+            txtOutput.InvokeIfRequired(() =>
             {
-                lstConsole.Items.Add(e.EventMessage);
+                writer.Write($"\n{e.EventMessage}");
             });
         }
     }
