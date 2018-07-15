@@ -1,0 +1,8 @@
+E:\Development\RansomNote\External Projects\FileTyper\bin\Debug\FileTyper.dll.config
+E:\Development\RansomNote\External Projects\FileTyper\bin\Debug\FileTyper.dll
+E:\Development\RansomNote\External Projects\FileTyper\bin\Debug\FileTyper.pdb
+E:\Development\RansomNote\External Projects\FileTyper\obj\Debug\FileTyper.Properties.Resources.resources
+E:\Development\RansomNote\External Projects\FileTyper\obj\Debug\FileTyper.csproj.GenerateResource.cache
+E:\Development\RansomNote\External Projects\FileTyper\obj\Debug\FileTyper.csproj.CoreCompileInputs.cache
+E:\Development\RansomNote\External Projects\FileTyper\obj\Debug\FileTyper.dll
+E:\Development\RansomNote\External Projects\FileTyper\obj\Debug\FileTyper.pdb

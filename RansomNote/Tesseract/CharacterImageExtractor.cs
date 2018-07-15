@@ -1,5 +1,6 @@
 ﻿using Leptonica;
 using Newtonsoft.Json;
+using ServiceStack.Text;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Tesseract;
 
@@ -66,6 +68,7 @@ namespace RansomNote.Tesseract
             var iterator = api.GetIterator();
             iterator.Begin();
             var l = new List<CharacterMap>();
+            var tsks = new List<Task>();
             using (var iter = iterator)
             {
                 do
@@ -74,32 +77,39 @@ namespace RansomNote.Tesseract
                     {
                         do
                         {
+                            
                             // get bounding box for symbol
                             var resultIterator = iterator.GetPageIterator();
                             var symbCount = 0;
-                            do
+                            tsks.Add(Task.Factory.StartNew(() =>
                             {
-                                resultIterator.BoundingBox(pageItLevel, out int left, out int top, out int right, out int bottom);
-                                var ch = iter.GetUTF8Text(pageItLevel);
-                                var rect = new Rectangle(left, top, right - left, bottom - top);
-                               
-                                var img = Crop(ima, rect);
-                                if (img == null)
+                                do
                                 {
-                                    Out(new ExtractionEventArgs($"Unabler to crop image with width: {rect.Width} height: {rect.Height}"));
-                                    continue;
-                                }
-                                Out(new ExtractionEventArgs($"Cropped Character For Box {symbCount}."));
-                                var path = $@"{_savePath}\{prefix}.{symbCount}.png";
-                                img.Save(path, ImageFormat.Png);
-                                l.Add(new CharacterMap
-                                {
-                                    FilePath = path,
-                                    Text = ch
-                                });
-                                Out(new ExtractionEventArgs($"Saving Cropped Image as {path}"));
-                                symbCount++;
-                            } while (resultIterator.Next(pageItLevel));
+                                   
+                                    resultIterator.BoundingBox(pageItLevel, out int left, out int top, out int right, out int bottom);
+                                    var ch = iter.GetUTF8Text(pageItLevel);
+                                    var rect = new Rectangle(left, top, right - left, bottom - top);
+
+                                    var img = Crop(ima, rect);
+                                    if (img == null)
+                                    {
+                                        Out(new ExtractionEventArgs($"Unable to crop image with width: {rect.Width} height: {rect.Height}"));
+                                        continue;
+                                    }
+                                    Out(new ExtractionEventArgs($"Cropped Character For Box {symbCount}."));
+                                    var path = $@"{_savePath}\{prefix}.{symbCount}.png";
+                                    img.Save(path, ImageFormat.Png);
+                                    l.Add(new CharacterMap
+                                    {
+                                        FilePath = path,
+                                        Text = ch
+                                    });
+                                    Out(new ExtractionEventArgs($"Saving Cropped Image as {path}"));
+                                    Interlocked.Increment(ref symbCount);
+                                } while (resultIterator.Next(pageItLevel));
+                            }));
+                            Task.WaitAll(tsks.ToArray());
+                           
                         } while (iter.Next(PageIteratorLevel.RIL_WORD));
                     } while (iter.Next(PageIteratorLevel.RIL_TEXTLINE));
                 } while (iter.Next(PageIteratorLevel.RIL_PARA));

@@ -210,7 +210,6 @@ E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\x86\pvt.cppan.demo.g
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\RansomNote.DebugConsole.exe.config
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\RansomNote.DebugConsole.exe
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\RansomNote.DebugConsole.pdb
-E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\RansomNote.dll
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\leptonica.net.dll
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\tesseract.net.dll
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\Accord.Imaging.dll
@@ -218,7 +217,6 @@ E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\Accord.dll
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\Accord.Statistics.dll
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\Accord.Math.dll
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\Accord.Math.Core.dll
-E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\RansomNote.pdb
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\Accord.Imaging.xml
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\Accord.xml
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\Accord.Statistics.xml
@@ -229,3 +227,11 @@ E:\Development\RansomNote\RansomNote.DebugConsole\obj\Debug\RansomNote.DebugCons
 E:\Development\RansomNote\RansomNote.DebugConsole\obj\Debug\RansomNote.DebugConsole.csproj.CopyComplete
 E:\Development\RansomNote\RansomNote.DebugConsole\obj\Debug\RansomNote.DebugConsole.exe
 E:\Development\RansomNote\RansomNote.DebugConsole\obj\Debug\RansomNote.DebugConsole.pdb
+E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\gsdll64.dll
+E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\RansomNote.Core.dll
+E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\Ghostscript.NET.dll
+E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\itextsharp.dll
+E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\ServiceStack.Text.dll
+E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\RansomNote.Core.pdb
+E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\Ghostscript.NET.xml
+E:\Development\RansomNote\RansomNote.DebugConsole\bin\Debug\ServiceStack.Text.xml
