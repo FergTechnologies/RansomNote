@@ -39,6 +39,7 @@ E:\Development\RansomNote\External Projects\FileTyper\bin\x64\Debug\Accord.Stati
 E:\Development\RansomNote\External Projects\FileTyper\bin\x64\Debug\Ghostscript.NET.xml
 E:\Development\RansomNote\External Projects\FileTyper\bin\x64\Debug\Newtonsoft.Json.xml
 E:\Development\RansomNote\External Projects\FileTyper\bin\x64\Debug\ServiceStack.Text.xml
+E:\Development\RansomNote\External Projects\FileTyper\obj\x64\Debug\FileTyper.csprojAssemblyReference.cache
 E:\Development\RansomNote\External Projects\FileTyper\obj\x64\Debug\FileTyper.Properties.Resources.resources
 E:\Development\RansomNote\External Projects\FileTyper\obj\x64\Debug\FileTyper.csproj.GenerateResource.cache
 E:\Development\RansomNote\External Projects\FileTyper\obj\x64\Debug\FileTyper.csproj.CoreCompileInputs.cache

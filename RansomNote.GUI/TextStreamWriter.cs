@@ -32,7 +32,11 @@ namespace RansomNote.GUI
 
         public override void WriteLine(string text)
         {
-            _output.AppendText(_output.Text.Length == 0 ? text : $"\r\n{text}");
+            _output.InvokeIfRequired(() =>
+            {
+                _output.AppendText(_output.Text.Length == 0 ? text : $"\r\n{text}");
+            });
+            
         }
         public override Encoding Encoding
         {

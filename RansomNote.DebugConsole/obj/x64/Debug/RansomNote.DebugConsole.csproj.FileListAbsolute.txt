@@ -1,5 +1,9 @@
 E:\GoogleDrive\Development\RansomNote\RansomNote\RansomNote.DebugConsole\obj\x64\Debug\RansomNote.DebugConsole.csprojAssemblyReference.cache
 E:\GoogleDrive\Development\RansomNote\RansomNote\RansomNote.DebugConsole\obj\x64\Debug\RansomNote.DebugConsole.csproj.CoreCompileInputs.cache
+E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Canadian_Aboriginal.traineddata
+E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Fraktur.traineddata
+E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Oriya.traineddata
+E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\spa.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\afr.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\amh.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\ara.traineddata
@@ -104,12 +108,10 @@ E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\san.tra
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Arabic.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Armenian.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Bengali.traineddata
-E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Canadian_Aboriginal.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Cherokee.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Cyrillic.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Devanagari.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Ethiopic.traineddata
-E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Fraktur.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Georgian.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Greek.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Gujarati.traineddata
@@ -129,7 +131,6 @@ E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Latin.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Malayalam.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Myanmar.traineddata
-E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Oriya.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Sinhala.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Syriac.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\script\Tamil.traineddata
@@ -143,7 +144,6 @@ E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\slk.tra
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\slk_frak.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\slv.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\snd.traineddata
-E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\spa.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\spa_old.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\sqi.traineddata
 E:\Development\RansomNote\RansomNote.DebugConsole\bin\x64\Debug\tessdata\srp.traineddata

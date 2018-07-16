@@ -45,20 +45,9 @@ namespace RansomNote.Tesseract
             Out(new ExtractionEventArgs("Loading complete."));
         }
 
-        public void GetCharacterImages(string prefix)
+        public void GetCharacterImages(ref TessBaseAPI api, string prefix)
         {
-            Out(new ExtractionEventArgs("Preparing to initialize tesseract."));
             var localDict = new Dictionary<char, Image>();
-            var dPath = "./tessdata/";
-            var lang = "eng";
-            var api = new TessBaseAPI();
-            OcrEngineMode oem = OcrEngineMode.TESSERACT_LSTM_COMBINED;
-            PageSegmentationMode psm = PageSegmentationMode.RAW_LINE;
-            if (!api.Init(dPath, lang, oem))
-            {
-                Err(new UnhandledExceptionEventArgs(new Exception("Could not initialize tesseract."), true));
-            }
-            api.SetPageSegMode(psm);
             Out(new ExtractionEventArgs("Setting Image..."));
             api.SetImage(pix);
             Out(new ExtractionEventArgs("Recoginizing Characters..."));
@@ -81,11 +70,12 @@ namespace RansomNote.Tesseract
                             // get bounding box for symbol
                             var resultIterator = iterator.GetPageIterator();
                             var symbCount = 0;
-                            tsks.Add(Task.Factory.StartNew(() =>
-                            {
                                 do
                                 {
-                                   
+                                   if (iter.IsAtBeginningOf(PageIteratorLevel.RIL_BLOCK) || iter.IsAtBeginningOf(PageIteratorLevel.RIL_TEXTLINE) || iter.IsAtBeginningOf(PageIteratorLevel.RIL_PARA) || iter.IsAtBeginningOf(PageIteratorLevel.RIL_WORD))
+                                    {
+                                        continue;
+                                    }
                                     resultIterator.BoundingBox(pageItLevel, out int left, out int top, out int right, out int bottom);
                                     var ch = iter.GetUTF8Text(pageItLevel);
                                     var rect = new Rectangle(left, top, right - left, bottom - top);
@@ -107,14 +97,13 @@ namespace RansomNote.Tesseract
                                     Out(new ExtractionEventArgs($"Saving Cropped Image as {path}"));
                                     Interlocked.Increment(ref symbCount);
                                 } while (resultIterator.Next(pageItLevel));
-                            }));
-                            Task.WaitAll(tsks.ToArray());
+                         
                            
                         } while (iter.Next(PageIteratorLevel.RIL_WORD));
                     } while (iter.Next(PageIteratorLevel.RIL_TEXTLINE));
                 } while (iter.Next(PageIteratorLevel.RIL_PARA));
             }
-
+            Out(new ExtractionEventArgs("Waiting for character cropping to complete..."));
             Out(new ExtractionEventArgs("Serializing Character Data to JSON..."));
             var json = JsonConvert.SerializeObject(l);
             var rPath = $@"{_savePath}\{prefix}.results.json";

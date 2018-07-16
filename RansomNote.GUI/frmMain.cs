@@ -12,6 +12,7 @@ using System.IO;
 using RansomNote.Imaging.Extensions;
 using System.Drawing.Imaging;
 using System.Collections.Concurrent;
+using Tesseract;
 
 namespace RansomNote.GUI
 {
@@ -19,12 +20,21 @@ namespace RansomNote.GUI
     {
         TextBoxStreamWriter writer;
 
-       
+        private const string dPath = "./tessdata/";
+        private const string lang = "eng";
+        private TessBaseAPI api;
         public frmMain()
         {
             InitializeComponent();
             writer = new TextBoxStreamWriter(txtOutput);
-            
+            api = new TessBaseAPI();
+            OcrEngineMode oem = OcrEngineMode.TESSERACT_LSTM_COMBINED;
+            PageSegmentationMode psm = PageSegmentationMode.RAW_LINE;
+            if (!api.Init(dPath, lang, oem))
+            {
+                throw new Exception("Could not initialize tesseract.");
+            }
+            api.SetPageSegMode(psm);
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
@@ -50,70 +60,56 @@ namespace RansomNote.GUI
         private void Export(string imgFile)
         {
 
-                if (!File.Exists(imgFile))
-                {
-                    throw new FileNotFoundException($"Could not locate image with filename {imgFile}.");
-                }
+            if (!File.Exists(imgFile))
+            {
+                throw new FileNotFoundException($"Could not locate image with filename {imgFile}.");
+            }
+            {
                 var chk = new FileTyper.FileTypeChecker();
 
-               
+
                 var typ = chk.GetFileType(new MemoryStream(File.ReadAllBytes(imgFile)));
-                var lstImages = new ConcurrentBag<Image>();
+                var lstImages = new List<Image>();
                 if (typ.Extension == ".pdf")
                 {
                     writer.WriteLine($"Getting Images From PDF {imgFile}...");
                     var pages = new PDF.PDFProcessor(File.ReadAllBytes(imgFile)).ParsePDF();
-                pages.OrderBy(a => a.Key).Select(a => a.Value).ToList().ForEach(a =>
-                {
-                    lstImages.Add(a);
-                });
-
-                
-                    writer.WriteLine($"Preprocessing {pages.Count} images...");
-                Parallel.ForEach(pages, (p) =>
-                {
-                    var cie = new CharacterImageExtractor(p.Value, (Directory.Exists(txtFolderPath.Text)) ? txtFolderPath.Text : Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
-                    cie.ConsoleOut += Cie_ConsoleOut;
-                    cie.Error += Cie_Error;
-                    var path = imgFile;
-                    Cursor = Cursors.WaitCursor;
-                    Task.Factory.StartNew(() =>
+                    pages.OrderBy(a => a.Key).Select(a => a.Value).ToList().ForEach(a =>
                     {
-                        cie.GetCharacterImages("eng.mycoiocr");
-                    }).ContinueWith((a) =>
-                    {
-                        Cursor = Cursors.Default;
+                        lstImages.Add(a);
                     });
-                });
                 }
                 else
                 {
                     var img = Image.FromFile(imgFile);
-                    writer.WriteLine($"Preprocessing image...");
-                        lstImages.Add(Preprocess(img));
+                   
+                    lstImages.Add(img);
                 }
-            var bag = new ConcurrentBag<Image>();
-
-                Parallel.ForEach(lstImages, (i) =>
+                writer.WriteLine($"Preprocessing images...");
+                for (var n = 0; n < lstImages.Count; n++)
                 {
-                    bag.Add(i);
-                    var cie = new CharacterImageExtractor(i, (Directory.Exists(txtFolderPath.Text)) ? txtFolderPath.Text : Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
-                    cie.ConsoleOut += Cie_ConsoleOut;
-                    cie.Error += Cie_Error;
-                    var path = imgFile;
-                    Cursor = Cursors.WaitCursor;
-                    Task.Factory.StartNew(() =>
-                    {
-                        cie.GetCharacterImages("eng.mycoiocr");
-                    }).ContinueWith((a) =>
+                    writer.WriteLine($"     Preprocessing Image {n}...");
+                    lstImages[n] = Preprocess(lstImages[n]);
+                }
+                var tsks = new List<Task>();
+                writer.WriteLine("Doing Character Extractions...");
+                foreach(var i in lstImages)
+                {
+                    tsks.Add(Task.Factory.StartNew(() =>
                     {
                         this.InvokeIfRequired(() =>
                         {
-                            Cursor = Cursors.Default;
+                            var cie = new CharacterImageExtractor(i, (Directory.Exists(txtFolderPath.Text)) ? txtFolderPath.Text : Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+                            cie.ConsoleOut += Cie_ConsoleOut;
+                            cie.Error += Cie_Error;
+                            var path = imgFile;
+                            cie.GetCharacterImages(ref api, $"eng.mycoiocr{lstImages.IndexOf(i)}");
+                            return;
                         });
-                        
-                    });
-                });
+                    }));
+                }
+                writer.WriteLine($"Waiting for character extraction...");
+            }
             
         }
         private byte[] imageToByteArray(System.Drawing.Image imageIn)
